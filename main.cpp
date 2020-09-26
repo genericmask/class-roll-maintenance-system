@@ -2,7 +2,7 @@
 #include <string>
 #include <list>
 #include <fstream>
-
+#include <climits>
 
 
 using namespace std;
@@ -274,30 +274,42 @@ int main()
 {
 	
 	list<Student> Student_list = read_student();
-
-	while (true)
-	{
+	int choice = 1;
+	while(choice != 0){
 		printMenu();
-		string choice;
-		cin >> choice;
-
-		if (choice == "0")
-			break;
-		else if (choice == "1")
-			Student_list = add_student(Student_list);//addStudent();
-		else if (choice == "2")
-			Student_list = delete_student(Student_list);//deleteStudent();
-		else if (choice == "3")
-			retrieve_name(Student_list);//retrieveStudentByName();
-		else if (choice == "4")
-			retrieve_usfid(Student_list);//retrieveStudentByID();
-		else if (choice == "5")
-			retrieve_email(Student_list);//retrieveStudentByEmail();
-		else if (choice == "6")
-			write_into(Student_list);//updateDataFields();
-		else
+		
+		while(!(cin >> choice)){
 			cout << "Invalid Number. Please try again." << endl;
-
+			cout << "Enter your choice [0-6]: ";
+			cin.clear();
+			cin.ignore(INT_MAX, '\n');
+		}
+		cin.clear();
+		cin.ignore(INT_MAX, '\n');
+		switch(choice){
+			case 0:
+				break;
+			case 1:
+				Student_list = add_student(Student_list);//addStudent();
+				break;
+			case 2:
+				delete_student(Student_list);//deleteStudent();
+				break;
+			case 3:
+				retrieve_name(Student_list);//retrieveStudentByName();
+				break;
+			case 4:
+				retrieve_usfid(Student_list);//retrieveStudentByID();
+				break;
+			case 5:
+				retrieve_email(Student_list);//retrieveStudentByEmail();
+				break;
+			case 6:
+				write_into(Student_list);//updateDataFields();
+				break;
+			default:
+				cout << "Invalid Number. Please try again." << endl;
+		}
 		cout << endl;
 	}
 
